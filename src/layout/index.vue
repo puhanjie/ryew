@@ -17,12 +17,12 @@
 </template>
 
 <script setup>
-import NavBar from '@/components/navbar/index.vue';
-import { useRouter } from 'vue-router';
-import Menu from '@/components/menu/index.vue';
-import defaultSettings from '@/config/setting.json';
+import NavBar from '@/components/navbar/index.vue'
+import { useRouter } from 'vue-router'
+import Menu from '@/components/menu/index.vue'
+import defaultSettings from '@/config/setting.json'
 
-const router = useRouter();
+const router = useRouter()
 </script>
 
 <style lang="less" scoped>

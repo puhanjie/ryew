@@ -13,22 +13,22 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
-import { useRouter } from 'vue-router';
+import { defineProps } from 'vue'
+import { useRouter } from 'vue-router'
 
 const props = defineProps({
     item: {
         type: Object,
         required: true
     }
-});
+})
 
-const router = useRouter();
-const absolutePath = router.getRoutes().filter(item => item.name == props.item.name)[0].path;
-const icon = props.item.meta?.icon ? `${props.item.meta?.icon}` : null;
+const router = useRouter()
+const absolutePath = router.getRoutes().filter(item => item.name == props.item.name)[0].path
+const icon = props.item.meta?.icon ? `${props.item.meta?.icon}` : null
 
 function onMenuItemClick() {
     //路由跳转
-    router.push(absolutePath);
+    router.push(absolutePath)
 }
 </script>

@@ -7,10 +7,10 @@
 </template>
 
 <script setup>
-import menuItem from '@/components/menu/menu-item.vue';
-import { useRouter } from "vue-router";
-import defaultSettings from '@/config/setting.json';
+import menuItem from '@/components/menu/menu-item.vue'
+import { useRouter } from "vue-router"
+import defaultSettings from '@/config/setting.json'
 
-const router = useRouter();
-const routes = router.options.routes;
+const router = useRouter()
+const routes = router.options.routes
 </script>

@@ -1,7 +1,7 @@
-import { createPinia } from 'pinia';
-import useUserStore from './modules/user';
+import { createPinia } from 'pinia'
+import useUserStore from './modules/user'
 
-const pinia = createPinia();
+const pinia = createPinia()
 
-export { useUserStore };
-export default pinia;
+export { useUserStore }
+export default pinia
