@@ -31,7 +31,7 @@ http.interceptors.response.use(
         const res = response.data
 
         // 自定义返回码等于20000，则输出错误信息。此处根据自己实际返回数据和定义的返回码修改
-        if (res.code !== 20000) {
+        if (res.code !== 0) {
             Message.error({
                 content: res.msg || 'Error',
                 duration: 5 * 1000,

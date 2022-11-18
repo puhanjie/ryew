@@ -9,7 +9,7 @@
             </a-layout-sider>
             <a-layout>
                 <a-layout-content class="layout-bottom-content">
-                    <router-view :key="router.currentRoute.path"/>
+                    <router-view :key="router.currentRoute.path" />
                 </a-layout-content>
             </a-layout>
         </a-layout>
