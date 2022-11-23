@@ -2,7 +2,6 @@
     <div class="login-form-wrapper">
         <div class="login-form-title">登录 Arco Design Pro</div>
         <div class="login-form-sub-title">登录 Arco Design Pro</div>
-        <div class="login-form-error-msg">{{ errorMessage }}</div>
         <a-form ref="loginForm" :model="userInfo" class="login-form" layout="vertical" @submit="handleSubmit">
             <a-form-item field="username" :rules="[{ required: true, message: '用户名不能为空' }]"
                 :validate-trigger="['change', 'blur']" hide-label>
@@ -45,11 +44,10 @@ import { useRouter } from 'vue-router'
 import { Message } from '@arco-design/web-vue'
 import { useUserStore } from '@/store'
 import useLoading from '@/hooks/loading'
-import login from '@/api/user'
-import setToken from '@/utils/auth'
+import { login } from '@/api/user'
+import { setToken } from '@/utils/auth'
 
 const router = useRouter()
-const errorMessage = ref('')
 const { loading, setLoading } = useLoading()
 const userStore = useUserStore()
 const userInfo = reactive({
@@ -61,15 +59,15 @@ const handleSubmit = async () => {
     if (loading.value) return
     setLoading(true)
     try {
-        const data = await login(userInfo).data
-        userStore.username = data.username
-        userStore.roles = data.roles
-        userStore.permissions = data.permissions
-        setToken(data.token)
-        router.push('/')
+        const res = await login(userInfo)
+        userStore.username = res.data.username
+        userStore.roles = res.data.roles
+        userStore.permissions = res.data.permissions
+        setToken(res.data.token)
         Message.success('登录成功')
+        router.push('/')
     } catch (err) {
-        errorMessage.value = err.message
+        console.error(err.message)
     } finally {
         setLoading(false)
     }
@@ -96,12 +94,6 @@ const setRememberPassword = () => {
         color: var(--color-text-3);
         font-size: 16px;
         line-height: 24px;
-    }
-
-    &-error-msg {
-        height: 32px;
-        color: rgb(var(--red-6));
-        line-height: 32px;
     }
 
     &-password-actions {

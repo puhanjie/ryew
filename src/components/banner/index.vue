@@ -20,20 +20,10 @@ import bannerImage from '@/assets/images/login-banner.png'
 
 const carouselItem = computed(() => [
     {
-        slogan: '开箱即用的高质量模板-图1',
+        slogan: '开箱即用的高质量模板',
         subSlogan: '丰富的页面模板，覆盖大多数业务场景',
         image: bannerImage,
-    },
-    {
-        slogan: '开箱即用的高质量模板-图2',
-        subSlogan: '丰富的页面模板，覆盖大多数业务场景',
-        image: bannerImage,
-    },
-    {
-        slogan: '开箱即用的高质量模板-图3',
-        subSlogan: '丰富的页面模板，覆盖大多数业务场景',
-        image: bannerImage,
-    },
+    }
 ])
 </script>
   

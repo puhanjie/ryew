@@ -12,15 +12,11 @@
         <div class="content-inner">
           <LoginForm />
         </div>
-        <div class="footer">
-          <Footer />
-        </div>
       </div>
     </div>
   </template>
   
   <script setup>
-    // import Footer from '@/components/footer/index.vue'
     import LoginBanner from '@/components/banner/index.vue'
     import LoginForm from '@/components/login-form/index.vue'
   </script>
@@ -43,13 +39,6 @@
         justify-content: center;
         padding-bottom: 40px;
       }
-  
-      .footer {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 100%;
-      }
     }
   
     .logo {
@@ -65,17 +54,6 @@
         margin-left: 4px;
         color: var(--color-fill-1);
         font-size: 20px;
-      }
-    }
-  </style>
-  
-  <style lang="less" scoped>
-    // responsive
-    @media (max-width: @screen-lg) {
-      .container {
-        .banner {
-          width: 25%;
-        }
       }
     }
   </style>

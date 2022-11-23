@@ -3,8 +3,14 @@ import Layout from '@/layout/index.vue'
 
 const routes = [
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login/index.vue'),
+    hidden: true
+  },
+  {
     path: '/',
-    name: 'layout',
+    name: 'home',
     component: Layout,
     redirect: '/dashboard',
     meta: {
@@ -17,18 +23,6 @@ const routes = [
         name: 'dashboard',
         component: () => import('@/views/dashboard/index.vue'),
         meta: { title: 'Dashboard' }
-      },
-      {
-        path: 'page1',
-        name: 'page1',
-        component: () => import('@/views/page1/index.vue'),
-        meta: { title: 'Page1' }
-      },
-      {
-        path: 'page2',
-        name: 'page2',
-        component: () => import('@/views/page2/index.vue'),
-        meta: { title: 'Page2' }
       }
     ]
   },
