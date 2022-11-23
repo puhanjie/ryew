@@ -7,7 +7,8 @@
             <template #title>{{ props.item.meta.title }}</template>
             <menu-item v-for="route in props.item.children" :key="route.path" :item="route"></menu-item>
         </a-sub-menu>
-        <a-menu-item v-else :key="absolutePath" @click="onMenuItemClick()">{{ props.item.meta.title }}
+        <a-menu-item v-else :key="absolutePath" @click="onMenuItemClick">
+            {{ props.item.meta.title }}
         </a-menu-item>
     </div>
 </template>

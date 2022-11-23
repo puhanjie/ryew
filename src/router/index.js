@@ -33,19 +33,19 @@ const routes = [
     ]
   },
   {
-    path: '/submenu',
-    name: 'submenu',
+    path: '/system',
+    name: 'system',
     component: Layout,
     meta: {
-      title: 'Submenu',
-      icon: 'icon-common'
+      title: '系统管理',
+      icon: 'icon-settings'
     },
     children: [
       {
-        path: 'menuitem',
-        name: 'menuitem',
-        component: () => import('@/views/menuitem/index.vue'),
-        meta: { title: 'Menuitem' }
+        path: 'user',
+        name: 'user',
+        component: () => import('@/views/user/index.vue'),
+        meta: { title: '用户管理' }
       }
     ]
   }
