@@ -9,7 +9,7 @@ export function login(data) {
 }
 
 export function getInfo(token) {
-    return request({
+    return http({
         url: '/api/v1/user/info',
         method: 'get',
         params: { token }
@@ -17,7 +17,7 @@ export function getInfo(token) {
 }
 
 export function logout() {
-    return request({
+    return http({
         url: '/api/v1/user/logout',
         method: 'post'
     })

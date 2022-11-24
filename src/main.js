@@ -7,6 +7,7 @@ import ArcoVue from '@arco-design/web-vue'
 import '@arco-design/web-vue/dist/arco.css'
 import '@/assets/style/global.less'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
+import './permission.js'
 import './mock/index.js'
 
 const app = createApp(App)

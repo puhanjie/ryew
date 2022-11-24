@@ -11,3 +11,13 @@ Mock.mock(new RegExp(`${process.env.VUE_APP_BASE_API}/api/v1/user/login`), (para
         token: 'admin-token'
     })
 })
+
+Mock.mock(new RegExp(`${process.env.VUE_APP_BASE_API}/api/v1/user/info`), (params) => {
+    return success({
+        id: '1',
+        username: 'admin',
+        roles: ['admin'],
+        permissions: ['admin'],
+        token: 'admin-token'
+    })
+})
