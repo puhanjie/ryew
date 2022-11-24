@@ -1,36 +1,34 @@
 import router from './router'
 import { useUserStore } from './store'
 import { Message } from '@arco-design/web-vue'
-import NProgress from 'nprogress' // progress bar
-import 'nprogress/nprogress.css' // progress bar style
-import { getToken } from '@/utils/auth' // get token from cookie
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+import { getToken } from '@/utils/auth'
 import { getInfo } from '@/api/user'
 
-// NProgress.configure({ showSpinner: false }) // NProgress Configuration
-
-const whiteList = ['/login'] // no redirect whitelist
-
 router.beforeEach(async (to, from, next) => {
-    // start progress bar
+    // 开始加载进度条
     NProgress.start()
-    // set page title
+    // 设置页面title
     document.title = to.meta.title
 
-    // determine whether the user has logged in
     const hasToken = getToken()
 
     if (hasToken) {
         if (to.path === '/login') {
-            // if is logged in, redirect to the home page
+            // 有token，则进入首页
             next({ path: '/' })
-            NProgress.done() // hack: https://github.com/PanJiaChen/vue-element-admin/pull/2939
+            // 进度条加载完成
+            NProgress.done()
         } else {
-            // determine whether the user has obtained his permission roles through getInfo
             const userStore = useUserStore();
             const hasRoles = userStore.roles && userStore.roles.length > 0
+
             if (hasRoles) {
+                // 有角色，则放行
                 next()
             } else {
+                // 无角色，用token重新获取角色
                 try {
                     const res = await getInfo(hasToken)
                     userStore.username = res.data.username
@@ -38,8 +36,7 @@ router.beforeEach(async (to, from, next) => {
                     userStore.permissions = res.data.permissions
                     next({ ...to, replace: true })
                 } catch (error) {
-                    // remove token and go to login page to re-login
-                    //   await useUserStore.dispatch('user/resetToken')    // 移除状态管理器中的当前token，重新登录获取新token
+                    // token过期，跳转至登录页
                     Message.error({
                         content: error || 'Has Error',
                         duration: 5 * 1000,
@@ -50,13 +47,12 @@ router.beforeEach(async (to, from, next) => {
             }
         }
     } else {
-        /* has no token*/
-        console.log('无token重新定位至登录页')
-        if (whiteList.indexOf(to.path) !== -1) {
-            // in the free login whitelist, go directly
+        /* 无token */
+        if (to.path === '/login') {
+            // 若是登录则放行
             next()
         } else {
-            // other pages that do not have permission to access are redirected to the login page.
+            // 非登陆则跳转为登录
             next(`/login?redirect=${to.path}`)
             NProgress.done()
         }
@@ -64,6 +60,6 @@ router.beforeEach(async (to, from, next) => {
 })
 
 router.afterEach(() => {
-    // finish progress bar
+    // 完成进度条加载
     NProgress.done()
 })

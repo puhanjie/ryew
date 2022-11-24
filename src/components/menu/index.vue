@@ -1,7 +1,8 @@
 <template>
     <div>
         <a-menu :style="{ width: `${defaultSettings.menuWidth}px` }" 
-        :default-open-keys="['/']" 
+        :level-indent="34"
+        :auto-open-selected="true"
         :default-selected-keys="['/dashboard']">
             <menu-item v-for="route in routes" :key="route.path" :item="route"></menu-item>
         </a-menu>

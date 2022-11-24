@@ -3,7 +3,7 @@
         <template v-if="hasChild()">
             <a-sub-menu :key="absolutePath">
                 <template #icon>
-                    <component :is="icon" />
+                    <component :is="icon" :size="18"/>
                 </template>
                 <template #title>{{ props.item.meta.title }}</template>
                 <menu-item v-for="route in props.item.children" :key="route.path" :item="route"></menu-item>
