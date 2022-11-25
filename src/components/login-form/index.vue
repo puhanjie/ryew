@@ -46,14 +46,14 @@ import { useUserStore } from '@/store'
 import useLoading from '@/hooks/loading'
 import { login } from '@/api/user'
 import { setToken } from '@/utils/auth'
-import { filterRoutes } from '@/utils/permissionRoutes'
+import { permissionRoutes } from '@/utils/routes'
 
 const router = useRouter()
 const { loading, setLoading } = useLoading()
 const userStore = useUserStore()
 const userInfo = reactive({
-    username: null,
-    password: null,
+    username: 'admin',
+    password: 'admin',
     rememberPassword: true
 })
 const handleSubmit = async () => {
@@ -63,7 +63,7 @@ const handleSubmit = async () => {
         const res = await login(userInfo)
 
         userStore.setUserStore(res.data)
-        userStore.routes = filterRoutes(router.options.routes, res.data.permissions)
+        userStore.routes = permissionRoutes(router.options.routes, res.data.permissions)
 
         setToken(res.data.token)
         Message.success('登录成功')

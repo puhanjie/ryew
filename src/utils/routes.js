@@ -7,7 +7,7 @@ function hasPermission(permissions, route) {
   }
 }
 
-export function filterRoutes(routes, permissions) {
+export function permissionRoutes(routes, permissions) {
   const res = []
 
   // 管理员返回所有菜单权限
@@ -19,7 +19,7 @@ export function filterRoutes(routes, permissions) {
     const tmp = { ...route }
     if (hasPermission(permissions, tmp)) {
       if (tmp?.children) {
-        tmp.children = filterRoutes(tmp.children, permissions)
+        tmp.children = permissionRoutes(tmp.children, permissions)
         // 菜单分组下用户无任何菜单权限，则不push到权限菜单中
         if (tmp.children.length === 0) {
           return

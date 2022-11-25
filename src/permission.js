@@ -5,7 +5,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { getToken } from '@/utils/auth'
 import { getInfo } from '@/api/user'
-import { filterRoutes } from '@/utils/permissionRoutes'
+import { permissionRoutes } from '@/utils/routes'
 
 router.beforeEach(async (to, from, next) => {
     // 开始加载进度条
@@ -33,7 +33,7 @@ router.beforeEach(async (to, from, next) => {
                 try {
                     const res = await getInfo(hasToken)
                     userStore.setUserStore(res.data)
-                    userStore.routes = filterRoutes(router.options.routes, res.data.permissions)
+                    userStore.routes = permissionRoutes(router.options.routes, res.data.permissions)
 
                     next({ ...to, replace: true })
                 } catch (error) {
