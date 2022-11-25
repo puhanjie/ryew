@@ -4,19 +4,19 @@ import { useUserStore } from '@/store'
 function checkPermission(el, binding) {
     const { value } = binding
     const userStore = useUserStore()
-    const { roles } = userStore
+    const { permissions } = userStore
 
     if (Array.isArray(value)) {
         if (value.length > 0) {
             const permissionValues = value
 
-            const hasPermission = permissionValues.includes(roles)
+            const hasPermission = permissionValues.includes(permissions)
             if (!hasPermission && el.parentNode) {
                 el.parentNode.removeChild(el)
             }
         }
     } else {
-        throw new Error(`need roles! Like v-permission="['admin','user']"`)
+        throw new Error(`need permissions! Like v-permission="['admin','user']"`)
     }
 }
 
