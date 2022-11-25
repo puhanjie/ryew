@@ -23,7 +23,10 @@ const routes = [
         path: 'dashboard',
         name: 'dashboard',
         component: () => import('@/views/dashboard/index.vue'),
-        meta: { title: 'Dashboard' }
+        meta: {
+          title: 'Dashboard',
+          permissions: ['app:dashboard']
+        }
       }
     ]
   },
@@ -40,7 +43,10 @@ const routes = [
         path: 'user',
         name: 'user',
         component: () => import('@/views/user/index.vue'),
-        meta: { title: '用户管理' }
+        meta: {
+          title: '用户管理',
+          permissions: ['app:user']
+        }
       }
     ]
   }

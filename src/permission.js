@@ -5,6 +5,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { getToken } from '@/utils/auth'
 import { getInfo } from '@/api/user'
+import { filterRoutes } from '@/utils/permissionRoutes'
 
 router.beforeEach(async (to, from, next) => {
     // 开始加载进度条
@@ -22,18 +23,18 @@ router.beforeEach(async (to, from, next) => {
             NProgress.done()
         } else {
             const userStore = useUserStore();
-            const hasRoles = userStore.roles && userStore.roles.length > 0
+            const hasPermissions = userStore.permissions && userStore.permissions.length > 0
 
-            if (hasRoles) {
-                // 有角色，则放行
+            if (hasPermissions) {
+                // 有权限，则放行
                 next()
             } else {
-                // 无角色，用token重新获取角色
+                // 无权限，用token重新获取权限
                 try {
                     const res = await getInfo(hasToken)
-                    userStore.username = res.data.username
-                    userStore.roles = res.data.roles
-                    userStore.permissions = res.data.permissions
+                    userStore.setUserStore(res.data)
+                    userStore.routes = filterRoutes(router.options.routes, res.data.permissions)
+
                     next({ ...to, replace: true })
                 } catch (error) {
                     // token过期，跳转至登录页

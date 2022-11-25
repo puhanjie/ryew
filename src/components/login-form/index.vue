@@ -46,6 +46,7 @@ import { useUserStore } from '@/store'
 import useLoading from '@/hooks/loading'
 import { login } from '@/api/user'
 import { setToken } from '@/utils/auth'
+import { filterRoutes } from '@/utils/permissionRoutes'
 
 const router = useRouter()
 const { loading, setLoading } = useLoading()
@@ -60,9 +61,10 @@ const handleSubmit = async () => {
     setLoading(true)
     try {
         const res = await login(userInfo)
-        userStore.username = res.data.username
-        userStore.roles = res.data.roles
-        userStore.permissions = res.data.permissions
+
+        userStore.setUserStore(res.data)
+        userStore.routes = filterRoutes(router.options.routes, res.data.permissions)
+
         setToken(res.data.token)
         Message.success('登录成功')
         router.push('/')

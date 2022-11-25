@@ -5,11 +5,18 @@ const useUserStore = defineStore('user', {
         return {
             username: '',
             roles: [],
-            permissions: []
+            permissions: [],
+            routes: []
         }
     },
     getters: {},
-    actions: {}
+    actions: {
+        setUserStore(user) {
+            this.username = user.username
+            this.roles = user.roles
+            this.permissions = user.permissions
+        }
+    }
 })
 
 export default useUserStore

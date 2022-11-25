@@ -4,16 +4,15 @@
         :level-indent="34"
         :auto-open-selected="true"
         :default-selected-keys="['/dashboard']">
-            <menu-item v-for="route in routes" :key="route.path" :item="route"></menu-item>
+            <menu-item v-for="route in userStore.routes" :key="route.path" :item="route"></menu-item>
         </a-menu>
     </div>
 </template>
 
 <script setup>
 import menuItem from '@/components/menu/menu-item.vue'
-import { useRouter } from "vue-router"
 import defaultSettings from '@/config/setting.json'
+import { useUserStore } from '@/store'
 
-const router = useRouter()
-const routes = router.options.routes
+const userStore = useUserStore()
 </script>
