@@ -33,7 +33,7 @@ const getQuery = (url, name) => {
 Mock.mock(new RegExp(`${process.env.VUE_APP_BASE_API}/api/v1/user/login`), (params) => {
     const { username, password } = JSON.parse(params.body);
     const user = userData.filter(item => item.username === username)[0]
-    console.log(user)
+    
     if (user.password !== password) {
         return fail('登录失败')
     }
