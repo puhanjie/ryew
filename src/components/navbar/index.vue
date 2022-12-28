@@ -11,17 +11,56 @@
         </div>
         <ul class="right-side">
             <li>
-                <a-tooltip content="搜索">
-                    <a-button class="nav-btn" type="outline" shape="circle">
-                        <template #icon>
-                            <icon-search />
-                        </template>
-                    </a-button>
-                </a-tooltip>
+                <a-dropdown trigger="click">
+                    <a-avatar :size="32" :style="{ marginRight: '8px', cursor: 'pointer' }">
+                        <img alt="avatar" :src="avatar" />
+                    </a-avatar>
+                    <template #content>
+                        <a-doption>
+                            <a-space @click="$router.push({ name: 'Info' })">
+                                <icon-user />
+                                <span>
+                                    用户中心
+                                </span>
+                            </a-space>
+                        </a-doption>
+                        <a-doption>
+                            <a-space @click="$router.push({ name: 'Setting' })">
+                                <icon-settings />
+                                <span>
+                                    用户设置
+                                </span>
+                            </a-space>
+                        </a-doption>
+                        <a-doption>
+                            <a-space @click="handleLogout">
+                                <icon-export />
+                                <span>
+                                    退出登录
+                                </span>
+                            </a-space>
+                        </a-doption>
+                    </template>
+                </a-dropdown>
             </li>
         </ul>
     </div>
 </template>
+
+<script setup>
+import { computed } from 'vue'
+import { useUserStore } from '@/store'
+
+const userStore = useUserStore()
+
+const avatar = computed(() => {
+    return userStore.avatar
+})
+
+const handleLogout = () => {
+    console.log('退出登录')
+}
+</script>
 
 <style lang="less" scoped>
 .navbar {
