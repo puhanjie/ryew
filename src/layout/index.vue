@@ -1,24 +1,25 @@
 <template>
     <a-layout class="layout">
-        <a-layout-sider class="layout-sider" :width="appStore.menuWidth" :collapsible="true"
-            :collapsed="collapsed" :hide-trigger="true">
+        <a-layout-sider class="layout-sider" :width="appStore.menuWidth" :collapsible="true" :collapsed="collapsed"
+            breakpoint="xl" :hide-trigger="true">
             <div class="logo" :style="{ 'width': `${menuWidth}px` }">
                 <a-space>
                     <img alt="logo"
                         src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image" />
-                    <a-typography-title :style="{ margin: 0, fontSize: '18px', color: '#fff' }" :heading="5" v-show="!collapsed">
+                    <a-typography-title :style="{ margin: 0, fontSize: '18px', color: '#fff' }" :heading="5"
+                        v-show="!collapsed">
                         Rye
                     </a-typography-title>
                 </a-space>
             </div>
             <Menu />
         </a-layout-sider>
-            <a-layout-header class="layout-navbar" :style="{ 'padding-left': `${menuWidth}px` }">
-                <NavBar />
-            </a-layout-header>
-            <a-layout-content class="layout-content" :style="{ 'padding-left': `${menuWidth}px` }">
-                <router-view :key="router.currentRoute.path" />
-            </a-layout-content>
+        <a-layout-header class="layout-navbar" :style="{ 'padding-left': `${menuWidth}px` }">
+            <NavBar />
+        </a-layout-header>
+        <a-layout-content class="layout-content" :style="{ 'padding-left': `${menuWidth}px` }">
+            <router-view :key="router.currentRoute.path" />
+        </a-layout-content>
     </a-layout>
 </template>
 
@@ -34,7 +35,7 @@ const appStore = useAppStore()
 
 const menuWidth = computed(() => {
     return appStore.menuCollapse ? 48 : appStore.menuWidth;
-  })
+})
 const collapsed = computed(() => {
     return appStore.menuCollapse
 })
@@ -56,8 +57,7 @@ const collapsed = computed(() => {
         height: 100%;
         padding: @nav-size-height 0 0 0;
         z-index: 99;
-        overflow: auto;
-        overflow-x: hidden;
+        transition: all 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
 
         .logo {
             display: flex;
