@@ -1,8 +1,5 @@
 <template>
     <a-breadcrumb class="container-breadcrumb">
-        <a-breadcrumb-item>
-            <icon-apps />
-        </a-breadcrumb-item>
         <a-breadcrumb-item v-for="item in props.items" :key="item">
             {{ item }}
         </a-breadcrumb-item>

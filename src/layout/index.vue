@@ -1,59 +1,88 @@
 <template>
     <a-layout class="layout">
-        <a-layout-header class="layout-header">
-            <NavBar />
-        </a-layout-header>
-        <a-layout class="layout-bottom">
-            <a-layout-sider class="layout-bottom-sider" :width="defaultSettings.menuWidth">
-                <Menu />
-            </a-layout-sider>
-            <a-layout>
-                <a-layout-content class="layout-bottom-content">
-                    <router-view :key="router.currentRoute.path" />
-                </a-layout-content>
-            </a-layout>
-        </a-layout>
+        <a-layout-sider class="layout-sider" :width="appStore.menuWidth" :collapsible="true"
+            :collapsed="collapsed" :hide-trigger="true">
+            <div class="logo" :style="{ 'width': `${menuWidth}px` }">
+                <a-space>
+                    <img alt="logo"
+                        src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image" />
+                    <a-typography-title :style="{ margin: 0, fontSize: '18px', color: '#fff' }" :heading="5" v-show="!collapsed">
+                        Rye
+                    </a-typography-title>
+                </a-space>
+            </div>
+            <Menu />
+        </a-layout-sider>
+            <a-layout-header class="layout-navbar" :style="{ 'padding-left': `${menuWidth}px` }">
+                <NavBar />
+            </a-layout-header>
+            <a-layout-content class="layout-content" :style="{ 'padding-left': `${menuWidth}px` }">
+                <router-view :key="router.currentRoute.path" />
+            </a-layout-content>
     </a-layout>
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import NavBar from '@/components/navbar/index.vue'
 import { useRouter } from 'vue-router'
 import Menu from '@/components/menu/index.vue'
-import defaultSettings from '@/config/setting.json'
+import { useAppStore } from '@/store'
 
 const router = useRouter()
+const appStore = useAppStore()
+
+const menuWidth = computed(() => {
+    return appStore.menuCollapse ? 48 : appStore.menuWidth;
+  })
+const collapsed = computed(() => {
+    return appStore.menuCollapse
+})
 </script>
 
 <style lang="less" scoped>
 @nav-size-height: 60px;
 
 .layout {
+    position: absolute;
     width: 100%;
     height: 100%;
+    background-color: var(--color-fill-2);
 
-    .layout-header {
-        width: 100%;
-        height: @nav-size-height;
-        z-index: 100;
+    .layout-sider {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        padding: @nav-size-height 0 0 0;
+        z-index: 99;
+        overflow: auto;
+        overflow-x: hidden;
+
+        .logo {
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            height: 60px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #232324;
+            z-index: 100;
+        }
     }
 
-    .layout-bottom {
-        position: absolute;
+    .layout-navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 100%;
+        height: @nav-size-height;
+        z-index: 98;
+    }
 
-        .layout-bottom-sider {
-            height: 100%;
-            padding-top: @nav-size-height;
-        }
-
-        .layout-bottom-content {
-            width: 100%;
-            height: 100%;
-            padding-top: @nav-size-height;
-            background-color: var(--color-fill-2);
-        }
+    .layout-content {
+        padding-top: @nav-size-height;
     }
 }
 </style>

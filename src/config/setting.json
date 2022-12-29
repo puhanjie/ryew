@@ -1,5 +1,6 @@
 {
     "theme": "light",
-    "menuWidth": 220
+    "menuWidth": 220,
+    "menuCollapse": false
 }
   

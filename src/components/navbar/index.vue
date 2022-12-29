@@ -1,13 +1,8 @@
 <template>
     <div class="navbar">
         <div class="left-side">
-            <a-space>
-                <img alt="logo"
-                    src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image" />
-                <a-typography-title :style="{ margin: 0, fontSize: '18px' }" :heading="5">
-                    Rye
-                </a-typography-title>
-            </a-space>
+            <component :is="appStore.menuCollapse ? 'icon-menu-unfold' : 'icon-menu-fold'" :size="20" style="cursor: pointer" @click="appStore.setCollapseStatus()"/>
+            <Breadcrumb style="padding-left:10px" :items="['系统管理', '用户管理']" />
         </div>
         <ul class="right-side">
             <li>
@@ -49,9 +44,11 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useUserStore } from '@/store'
+import { useUserStore, useAppStore } from '@/store'
+import Breadcrumb from '@/components/breadcrumb/index.vue'
 
 const userStore = useUserStore()
+const appStore = useAppStore()
 
 const avatar = computed(() => {
     return userStore.avatar
@@ -74,7 +71,7 @@ const handleLogout = () => {
 .left-side {
     display: flex;
     align-items: center;
-    padding-left: 20px;
+    padding-left: 10px;
 }
 
 .right-side {

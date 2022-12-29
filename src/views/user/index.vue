@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <Breadcrumb :items="['系统管理', '用户管理']" />
         <a-card class="general-card" title="用户管理">
             <a-row>
                 <a-col :flex="1">
@@ -65,7 +64,6 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
-import Breadcrumb from '@/components/breadcrumb/index.vue'
 
 const generateFormModel = () => {
     return {
@@ -119,7 +117,7 @@ const data = reactive([
 
 <style lang="less" scoped>
 .container {
-    padding: 0 20px 20px 20px;
+    padding: 15px;
     height: 100%;
 }
 </style>
