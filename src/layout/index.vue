@@ -62,13 +62,14 @@ const collapsed = computed(() => {
         .logo {
             display: flex;
             align-items: center;
-            padding-left: 10px;
+            padding-left: 8px;
             height: 60px;
             position: fixed;
             top: 0;
             left: 0;
             background-color: #232324;
             z-index: 100;
+            transition: all 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
         }
     }
 
