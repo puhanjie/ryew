@@ -57,6 +57,7 @@ const collapsed = computed(() => {
         height: 100%;
         padding: @nav-size-height 0 0 0;
         z-index: 99;
+        background-color: #232324;
         transition: all 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
 
         .logo {
@@ -80,10 +81,12 @@ const collapsed = computed(() => {
         width: 100%;
         height: @nav-size-height;
         z-index: 98;
+        transition: all 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
     }
 
     .layout-content {
         padding-top: @nav-size-height;
+        transition: all 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
     }
 }
 </style>
